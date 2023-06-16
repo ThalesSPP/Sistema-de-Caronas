@@ -35,18 +35,28 @@ def calcular_custos():
         linhas = arquivo.readlines()
 
     resultados = []
+    total_custo = 0  # Variável para armazenar o custo total
+
     for linha in linhas:
         nome, vezes_semana, tipo_viagem = linha.strip().split(";")
 
-        if tipo_viagem == "ida":
-            custo = 2 * int(vezes_semana)
+        if int(vezes_semana) != 0:  # Verifica se o valor de vezes_semana é diferente de zero
+            if tipo_viagem == "ida":
+                custo = 2 * int(vezes_semana)
+            elif tipo_viagem == "ida_volta":
+                custo = 4 * int(vezes_semana)
 
-        elif tipo_viagem == "ida_volta":
-            custo = 4 * int(vezes_semana)
+            resultados.append(f"{nome}: R$ {custo:.2f}")
+            total_custo += custo
 
-        resultados.append(f"{nome}: R$ {custo:.2f}")
-
-    status_label["text"] = "\n".join(resultados)
+    if resultados:  # Verifica se a lista de resultados não está vazia
+        # Adiciona uma linha separadora
+        resultados.append("___________________________")
+        # Adiciona o valor total
+        resultados.append(f"Total: R$ {total_custo:.2f}")
+        status_label["text"] = "\n".join(resultados)
+    else:
+        status_label["text"] = "Nenhum participante com valor diferente de zero."
 
 
 window = tk.Tk()
