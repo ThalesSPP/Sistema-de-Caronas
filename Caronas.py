@@ -42,9 +42,9 @@ def calcular_custos():
 
         if int(vezes_semana) != 0:  # Verifica se o valor de vezes_semana é diferente de zero
             if tipo_viagem == "ida":
-                custo = 2 * int(vezes_semana)
+                custo = 2.75 * int(vezes_semana)
             elif tipo_viagem == "ida_volta":
-                custo = 4 * int(vezes_semana)
+                custo = 5.5 * int(vezes_semana)
 
             resultados.append(f"{nome}: R$ {custo:.2f}")
             total_custo += custo
